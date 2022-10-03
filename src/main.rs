@@ -1,14 +1,14 @@
 use comrak::{markdown_to_html, ComrakOptions};
+use std::fs;
 
 fn main() {
-    println!("Hello, world!");
+    println!("Opening README \n");
 
-    assert_eq!(
-        markdown_to_html("Hello, **世界**!", &ComrakOptions::default()),
-        "<p>Hello, <strong>世界</strong>!</p>\n"
-    );
+    let file_path = "README.md".to_string();
+    let contents = fs::read_to_string(file_path).expect("Couldn't read file");
 
-    let markdown = markdown_to_html("Hello, **世界**!", &ComrakOptions::default());
+    let markdown = markdown_to_html(&contents, &ComrakOptions::default());
 
+    println!("Markdown parsed into HTML \n");
     println!("{markdown}");
 }
